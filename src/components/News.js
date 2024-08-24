@@ -48,7 +48,7 @@ export class News extends Component {
     this.state = {
       articles: this.articles,
       loading: false,
-      page:1  //articles contents on page set default at page 1 
+      page:1    //articles contents on page set default at page 1 
     }
   }
 
@@ -60,23 +60,52 @@ export class News extends Component {
     console.log(parsedData)
     this.setState({articles: parsedData.articles})
   }
+  //previous Button Logic
+  handlePrevClick = async ()=>{
+    console.log("Previous")
+    let url=`https://newsapi.org/v2/top-headlines?sources=techcrunch&apiKey=7cceb152b90f4af98b415c5a3334a10a&page=${this.state.page - 1}`;
+    let data = await fetch(url);  //fetching api
+    let parsedData = await data.json(); // data converted into json file
+    console.log(parsedData)
+    
+    this.setState({     //Changing page state
+      page: this.state.page - 1, //changing page
+      articles: parsedData.articles   //setting article State
+    })
+  }
+
+  //Next Button Logic
+  handleNextClick = async ()=>{
+    console.log("Next")
+    let url=`https://newsapi.org/v2/top-headlines?sources=techcrunch&apiKey=7cceb152b90f4af98b415c5a3334a10a&page=${this.state.page + 1}`;
+    let data = await fetch(url);  //fetching api
+    let parsedData = await data.json(); // data converted into json file
+    console.log(parsedData)
+    
+    this.setState({     //Changing page state
+      page: this.state.page + 1, //changing page
+      articles: parsedData.articles   //setting article State
+    })
+  }
+
 
   render() {
+    const {darkMode} = this.props;
     return (
-      <div className="container my-3" >
-        <h1 className="text my-3">NewsMonkey Top Headlines</h1>
+      <div className={`container my-2 text-${darkMode ?'light':'black'}`} >
+        <h1 className="text my-3" >NewsMonkey Top Headlines</h1>
         <div className="row my-3">
         {this.state.articles.map((element)=>{
           return(
           <div className="col-md-4" key={element.url} >
-              <NewsItem  title={element.title?element.title.slice(0,40):""} description={element.description?element.description.slice(0,88):""} imageUrl={element.urlToImage} url={element.url} />
+              <NewsItem darkMode={darkMode} title={element.title?element.title.slice(0,40):""} description={element.description?element.description.slice(0,88):""} imageUrl={element.urlToImage} url={element.url} />
           </div>
         )
       })}
       </div>
-      <div className="container">
-      <button type="button" class="btn btn-primary mx-3">Previous</button>
-      <button type="button" class="btn btn-secondary mx-3">Next</button>
+      <div className="container d-flex justify-content-between ">
+      <button type="button" disabled={this.state.page<=1} className="btn btn-secondary mx-3" onClick={this.handlePrevClick} >&larr; Previous</button>
+      <button type="button" className="btn btn-primary mx-3" onClick={this.handleNextClick} >Next &rarr; </button>
       </div>
       </div>
     )

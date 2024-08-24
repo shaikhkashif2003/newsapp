@@ -2,10 +2,11 @@ import React, { Component } from 'react'
 
 export class NavBar extends Component {
   render() {
-    let{toggleMode }=this.props
+    const { darkMode, toggleDarkMode } = this.props;
+
     return (
       <div>
-        <nav className={`navbar navbar-expand-lg navbar-${toggleMode} bg-${toggleMode}` }>
+        <nav className={`navbar navbar-expand-lg navbar-${darkMode ? 'dark' : 'light'} bg-${darkMode ? 'black' : 'white'}` }>
             <div className="container-fluid">
                 <a className="navbar-brand" href="/">NewsMonkey</a>
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -20,8 +21,8 @@ export class NavBar extends Component {
                     <a className="nav-link" href="/about">About</a>
                     </li>
                 </ul>
-                    <div className="form-check form-switch">
-                      <input className="form-check-input" onClick={toggleMode} type="checkbox" role="switch" id="flexSwitchCheckDefault"/>
+                    <div className={`form-check form-switch text-${darkMode ?'light':'dark'}`}>
+                      <input className="form-check-input" onClick={toggleDarkMode} type="checkbox" role="switch" id="flexSwitchCheckDefault"/>
                       <label className="form-check-label" htmlFor="flexSwitchCheckDefault">Dark Mode</label>
                     </div>
                 </div>
