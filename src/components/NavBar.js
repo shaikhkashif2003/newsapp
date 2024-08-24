@@ -2,9 +2,10 @@ import React, { Component } from 'react'
 
 export class NavBar extends Component {
   render() {
+    let{toggleMode }=this.props
     return (
       <div>
-        <nav className="navbar navbar-expand-lg bg-body-tertiary">
+        <nav className={`navbar navbar-expand-lg navbar-${toggleMode} bg-${toggleMode}` }>
             <div className="container-fluid">
                 <a className="navbar-brand" href="/">NewsMonkey</a>
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -19,9 +20,13 @@ export class NavBar extends Component {
                     <a className="nav-link" href="/about">About</a>
                     </li>
                 </ul>
+                    <div className="form-check form-switch">
+                      <input className="form-check-input" onClick={toggleMode} type="checkbox" role="switch" id="flexSwitchCheckDefault"/>
+                      <label className="form-check-label" htmlFor="flexSwitchCheckDefault">Dark Mode</label>
+                    </div>
                 </div>
             </div>
-            </nav>
+        </nav>
       </div>
     )
   }

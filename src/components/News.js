@@ -47,15 +47,16 @@ export class News extends Component {
     super();
     this.state = {
       articles: this.articles,
-      loading: false
+      loading: false,
+      page:1  //articles contents on page set default at page 1 
     }
   }
 
   async componentDidMount(){
     console.log("Hello in DidMount from News Component");
-    let url="https://newsapi.org/v2/top-headlines?sources=techcrunch&apiKey=7cceb152b90f4af98b415c5a3334a10a";
-    let data = await fetch(url);
-    let parsedData = await data.json();
+    let url="https://newsapi.org/v2/top-headlines?sources=techcrunch&apiKey=7cceb152b90f4af98b415c5a3334a10a&page=1"; //api url
+    let data = await fetch(url);  //fetching api
+    let parsedData = await data.json(); // data converted into json file
     console.log(parsedData)
     this.setState({articles: parsedData.articles})
   }
@@ -72,6 +73,10 @@ export class News extends Component {
           </div>
         )
       })}
+      </div>
+      <div className="container">
+      <button type="button" class="btn btn-primary mx-3">Previous</button>
+      <button type="button" class="btn btn-secondary mx-3">Next</button>
       </div>
       </div>
     )
