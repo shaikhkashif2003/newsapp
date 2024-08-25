@@ -54,16 +54,16 @@ export class News extends Component {
 
   async componentDidMount(){
     console.log("Hello in DidMount from News Component");
-    let url="https://newsapi.org/v2/top-headlines?sources=techcrunch&apiKey=7cceb152b90f4af98b415c5a3334a10a&page=1"; //api url
+    let url="https://newsapi.org/v2/top-headlines?sources=techcrunch&apiKey=7cceb152b90f4af98b415c5a3334a10a&page=1&pageSize=3"; //api url
     let data = await fetch(url);  //fetching api
     let parsedData = await data.json(); // data converted into json file
     console.log(parsedData)
-    this.setState({articles: parsedData.articles})
+    this.setState({articles: parsedData.articles, totalResults:parsedData.totalResults})    //adding data with article array from the fatch api and total resuls of data
   }
   //previous Button Logic
   handlePrevClick = async ()=>{
     console.log("Previous")
-    let url=`https://newsapi.org/v2/top-headlines?sources=techcrunch&apiKey=7cceb152b90f4af98b415c5a3334a10a&page=${this.state.page - 1}`;
+    let url=`https://newsapi.org/v2/top-headlines?sources=techcrunch&apiKey=7cceb152b90f4af98b415c5a3334a10a&page=${this.state.page - 1}&pageSize=3`;
     let data = await fetch(url);  //fetching api
     let parsedData = await data.json(); // data converted into json file
     console.log(parsedData)
@@ -76,18 +76,24 @@ export class News extends Component {
 
   //Next Button Logic
   handleNextClick = async ()=>{
-    console.log("Next")
-    let url=`https://newsapi.org/v2/top-headlines?sources=techcrunch&apiKey=7cceb152b90f4af98b415c5a3334a10a&page=${this.state.page + 1}`;
-    let data = await fetch(url);  //fetching api
-    let parsedData = await data.json(); // data converted into json file
-    console.log(parsedData)
-    
-    this.setState({     //Changing page state
-      page: this.state.page + 1, //changing page
-      articles: parsedData.articles   //setting article State
-    })
-  }
 
+    if(this.state.page + 1 > Math.ceil(this.state.totalResults/3)){       //how many pages required to show the data 
+      console.log("No More Pages");
+
+    }else{
+      console.log("Next")
+      let url=`https://newsapi.org/v2/top-headlines?sources=techcrunch&apiKey=7cceb152b90f4af98b415c5a3334a10a&page=${this.state.page + 1}&pageSize=3`;
+      let data = await fetch(url);  //fetching api
+      let parsedData = await data.json(); // data converted into json file
+      console.log(parsedData)
+      
+      this.setState({     //Changing page state
+        page: this.state.page + 1, //changing page
+        articles: parsedData.articles   //setting article State
+      })
+    }
+  }
+    
 
   render() {
     const {darkMode} = this.props;
