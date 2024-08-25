@@ -49,7 +49,7 @@ export default class App extends Component {
     return (
       <div>
         <NavBar darkMode={darkMode} toggleDarkMode={this.toggleDarkMode} />
-        <News darkMode={darkMode} />
+        <News darkMode={darkMode} pageSize={3} />
       </div>
     )
   }
