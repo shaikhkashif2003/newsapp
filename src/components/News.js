@@ -106,7 +106,7 @@ export class News extends Component {
         <h1 className="text-center">NewsMonkey - Top Headlines</h1>
         {this.state.loading && <Spinner/>}
         <div className="row my-3">
-        {!this.state.loading && this.state.articles.map((element)=>{    //if loading is true so dont display the data on page
+        {!this.state.loading && this.state.articles.map((element)=>{    //if loading is true so dont display the data on pag
           return(
           <div className="col-md-4" key={element.url} >
               <NewsItem darkMode={darkMode} title={element.title?element.title.slice(0,40):""} description={element.description?element.description.slice(0,88):""} imageUrl={element.urlToImage} url={element.url} />
