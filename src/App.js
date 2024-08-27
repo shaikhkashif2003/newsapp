@@ -3,7 +3,7 @@ import './App.css';
 import React, { Component } from 'react'
 import NavBar from './components/NavBar';
 import News from './components/News';
-import {createBrowserRouter,RouterProvider,Outlet} from "react-router-dom";
+import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 
 export default class App extends Component {
 
@@ -22,9 +22,9 @@ export default class App extends Component {
 
     const { darkMode } = this.state;
 
-    if(darkMode===true){
+    if (darkMode === true) {
       document.body.style.backgroundColor = '#021321';
-    }else{
+    } else {
       document.body.style.backgroundColor = '#f0f0f0';
     }
 
@@ -36,7 +36,7 @@ export default class App extends Component {
         path: '/',
         element: (
           <>
-          <NavBar darkMode={darkMode} toggleDarkMode={this.toggleDarkMode}  />
+            <NavBar darkMode={darkMode} toggleDarkMode={this.toggleDarkMode} />
             <Outlet />
           </>
         ),
@@ -75,8 +75,8 @@ export default class App extends Component {
 
     return (
       <div>
-          {/* <NavBar darkMode={darkMode} toggleDarkMode={this.toggleDarkMode}  /> */}
-          <RouterProvider router={router} />
+        {/* <NavBar darkMode={darkMode} toggleDarkMode={this.toggleDarkMode}  /> */}
+        <RouterProvider router={router} />
 
       </div>
     )
