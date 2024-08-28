@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 export class NewsItem extends Component {
   render() {
       let {title, description, imageUrl, url, date, author, source ,darkMode} = this.props;
+      
     return (
       <div className="my-3" style={{textAlign: "-webkit-center"}} >
         <div className={`card text-${darkMode ? 'light' : 'black'} bg-${darkMode ? 'dark' : 'white'}` } style={{width: "20rem", height: "30rem" }}>

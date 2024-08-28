@@ -43,31 +43,31 @@ export default class App extends Component {
         children: [
           {
             path: "general",
-            element: <News key="general" darkMode={darkMode} pageSize={3} county="in" category="general" />,   // using key, mounting the components with the updated props
+            element: <News key="general" darkMode={darkMode} pageSize={30} county="in" category="general" />,   // using key, mounting the components with the updated props
           },
           {
             path: "business",
-            element: <News key="business" darkMode={darkMode} pageSize={3} county="in" category="business" />,
+            element: <News key="business" darkMode={darkMode} pageSize={30} county="in" category="business" />,
           },
           {
             path: "entertainment",
-            element: <News key="entertainment" darkMode={darkMode} pageSize={3} county="in" category="entertainment" />,
+            element: <News key="entertainment" darkMode={darkMode} pageSize={30} county="in" category="entertainment" />,
           },
           {
             path: "health",
-            element: <News key="health" darkMode={darkMode} pageSize={3} county="in" category="health" />,
+            element: <News key="health" darkMode={darkMode} pageSize={30} county="in" category="health" />,
           },
           {
             path: "science",
-            element: <News key="science" darkMode={darkMode} pageSize={3} county="in" category="science" />,
+            element: <News key="science" darkMode={darkMode} pageSize={30} county="in" category="science" />,
           },
           {
             path: "sports",
-            element: <News key="sports" darkMode={darkMode} pageSize={3} county="in" category="sports" />,
+            element: <News key="sports" darkMode={darkMode} pageSize={30} county="in" category="sports" />,
           },
           {
             path: "technology",
-            element: <News key="technology" darkMode={darkMode} pageSize={3} county="in" category="technology" />,
+            element: <News key="technology" darkMode={darkMode} pageSize={30} county="in" category="technology" />,
           },
         ],
       },
