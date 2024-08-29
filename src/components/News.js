@@ -34,49 +34,39 @@ export class News extends Component {
     document.title = `${this.capatilizedFirstLetter(this.props.category)}-NewsMonkey `;
   }
 
-  async componentDidMount() {
-    // console.log("Hello in DidMount from News Component");
-    let url = `https://newsapi.org/v2/top-headlines?county=${this.props.county}&category=${this.props.category}&apiKey=8bfa2bdf2e674351abd2abb6baf3f035&page=1&pageSize=${this.props.pageSize}`; //api url
+
+  
+  async updateNews() {
+    this.props.setProgress(10); //initial value of progress for top loader 
+    let url = `https://newsapi.org/v2/top-headlines?county=${this.props.county}&category=${this.props.category}&apiKey=8bfa2bdf2e674351abd2abb6baf3f035&page=${this.state.page}&pageSize=${this.props.pageSize}`; //api url
     this.setState({ loading: true });
     let data = await fetch(url);  //fetching api
+    this.props.setProgress(30);
     let parsedData = await data.json(); // data converted into json file
     console.log(parsedData)   //data will be shown on console log after maping from api 
+    this.props.setProgress(70);
     this.setState({
       articles: parsedData.articles,
       totalResults: parsedData.totalResults,
       loading: false
     })    //adding data with article array from the fatch api and total resuls of data
+    this.props.setProgress(100);  //value of progress for top loader after data fatched 
   }
+
+  async componentDidMount(){
+    this.updateNews();
+  }
+
   //previous Button Logic
   handlePrevClick = async () => {
-    // console.log("Previous")
-    let url = `https://newsapi.org/v2/top-headlines?county=${this.props.county}&category=${this.props.category}&apiKey=8bfa2bdf2e674351abd2abb6baf3f035&page=${this.state.page - 1}&pageSize=${this.props.pageSize}`;
-    this.setState({ loading: true });  //changing state of loading too show spinner until data fatched from api server 
-    let data = await fetch(url);  //fetching api
-    let parsedData = await data.json(); // data converted into json file
-    this.setState({     //Changing page state
-      page: this.state.page - 1, //changing page
-      articles: parsedData.articles,   //setting article State
-      loading: false
-    })
+   this.setState({page: this.state.page - 1})
+   this.updateNews();
   }
 
   //Next Button Logic
   handleNextClick = async () => {
-
-    if (!(this.state.page + 1 > Math.ceil(this.state.totalResults / this.props.pageSize))) {      //how many pages required to show the data 
-      // console.log("No More Pages");
-      let url = `https://newsapi.org/v2/top-headlines?county=${this.props.county}&category=${this.props.category}&apiKey=8bfa2bdf2e674351abd2abb6baf3f035&page=${this.state.page + 1}&pageSize=${this.props.pageSize}`;
-      this.setState({ loading: true });  //changing state of loading too show spinner until data fatched from api server 
-      let data = await fetch(url);  //fetching api
-      let parsedData = await data.json(); // data converted into json file
-
-      this.setState({     //Changing page state
-        page: this.state.page + 1, //changing page
-        articles: parsedData.articles, //setting article State
-        loading: false
-      })
-    }
+    this.setState({page: this.state.page + 1})
+    this.updateNews();
   }
 
   //fatching data with url in infinite scroll

@@ -4,6 +4,7 @@ import React, { Component } from 'react'
 import NavBar from './components/NavBar';
 import News from './components/News';
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
+import LoadingBar from 'react-top-loading-bar'
 
 export default class App extends Component {
 
@@ -14,9 +15,22 @@ export default class App extends Component {
     };
   }
 
+
   toggleDarkMode = () => {
     this.setState({ darkMode: !this.state.darkMode });
   };
+
+  
+  //top loader bar progress 
+  state={
+    progress:0    //initial progress set as zero
+  }
+
+  setProgress=(progress)=>{
+    this.setState({progress: progress });
+  }
+
+
 
   render() {
 
@@ -29,7 +43,6 @@ export default class App extends Component {
     }
 
 
-
     //Set up Router
     const router = createBrowserRouter([
       {
@@ -37,37 +50,42 @@ export default class App extends Component {
         element: (
           <>
             <NavBar darkMode={darkMode} toggleDarkMode={this.toggleDarkMode} />
+            <LoadingBar             //top loading bar
+            height={3}
+            color='#f11946'
+            progress={this.state.progress}
+          />
             <Outlet />
           </>
         ),
         children: [
           {
             path: "general",
-            element: <News key="general" darkMode={darkMode} pageSize={30} county="in" category="general" />,   // using key, mounting the components with the updated props
+            element: <News setProgress={this.setProgress} key="general" darkMode={darkMode} pageSize={30} county="in" category="general" />,   // using key, mounting the components with the updated props
           },
           {
             path: "business",
-            element: <News key="business" darkMode={darkMode} pageSize={30} county="in" category="business" />,
+            element: <News setProgress={this.setProgress} key="business" darkMode={darkMode} pageSize={30} county="in" category="business" />,
           },
           {
             path: "entertainment",
-            element: <News key="entertainment" darkMode={darkMode} pageSize={30} county="in" category="entertainment" />,
+            element: <News setProgress={this.setProgress} key="entertainment" darkMode={darkMode} pageSize={30} county="in" category="entertainment" />,
           },
           {
             path: "health",
-            element: <News key="health" darkMode={darkMode} pageSize={30} county="in" category="health" />,
+            element: <News setProgress={this.setProgress} key="health" darkMode={darkMode} pageSize={30} county="in" category="health" />,
           },
           {
             path: "science",
-            element: <News key="science" darkMode={darkMode} pageSize={30} county="in" category="science" />,
+            element: <News setProgress={this.setProgress} key="science" darkMode={darkMode} pageSize={30} county="in" category="science" />,
           },
           {
             path: "sports",
-            element: <News key="sports" darkMode={darkMode} pageSize={30} county="in" category="sports" />,
+            element: <News setProgress={this.setProgress} key="sports" darkMode={darkMode} pageSize={30} county="in" category="sports" />,
           },
           {
             path: "technology",
-            element: <News key="technology" darkMode={darkMode} pageSize={30} county="in" category="technology" />,
+            element: <News setProgress={this.setProgress} key="technology" darkMode={darkMode} pageSize={30} county="in" category="technology" />,
           },
         ],
       },
