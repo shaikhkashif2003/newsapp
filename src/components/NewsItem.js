@@ -1,12 +1,11 @@
-import React, { Component } from 'react'
+import React from 'react'
 
-export class NewsItem extends Component {
-  render() {
-    let { title, description, imageUrl, url, date, author, source, darkMode } = this.props;
+const NewsItem = (props) => {
+    let { title, description, imageUrl, url, date, author, source, darkMode } = props;
 
     return (
       <div className="my-3"  >
-        <div className={`card text-${darkMode ? 'light' : 'black'} bg-${darkMode ? 'dark' : 'white'}`} style={{ width: "20rem", height: "30rem" }}>
+        <div className={`card text-${darkMode==='dark'? 'light' : 'black'} bg-${darkMode==='dark' ? 'dark' : 'white'}`} style={{ width: "20rem", height: "30rem" }}>
             <div style={{display:'flex', justifyContent: 'flex-end', position: 'absolute', right: '0' }} >
               <span className="badge rounded-pill bg-danger">{source}</span>
             </div>
@@ -20,7 +19,7 @@ export class NewsItem extends Component {
         </div>
       </div>
     )
-  }
+  
 }
 
 export default NewsItem
