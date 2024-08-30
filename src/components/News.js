@@ -12,7 +12,6 @@ const News = (props) => {
   const [loading, setLoading] = useState(true)
   const [page, setPage] = useState(1)
   const [totalResults, setTotalResults] = useState(0)
-  // document.title = `${capatilizedFirstLetter(props.category)}-NewsMonkey `;
 
   const capatilizedFirstLetter = (string) => {
     return props.category.charAt(0).toUpperCase() + props.category.slice(1);
@@ -36,7 +35,9 @@ const News = (props) => {
   }
 
   useEffect(() => {
+    document.title = `${capatilizedFirstLetter(props.category)}-NewsMonkey `;
     updateNews();
+    // eslint-disable-next-line
   }, [])
 
   // //previous Button Logic
@@ -53,8 +54,8 @@ const News = (props) => {
 
   //fatching data with url in infinite scroll
   const fetchMoreData = async () => {
+    let url = `https://newsapi.org/v2/top-headlines?county=${props.county}&category=${props.category}&apiKey=${props.apiKey}&page=${page + 1}&pageSize=${props.pageSize}`; //api url
     setPage(page + 1)
-    let url = `https://newsapi.org/v2/top-headlines?county=${props.county}&category=${props.category}&apiKey=${props.apiKey}&page=${page}&pageSize=${props.pageSize}`; //api url
     setLoading(true)
     let data = await fetch(url);
     let parsedData = await data.json();
@@ -66,15 +67,15 @@ const News = (props) => {
   const { darkMode } = props;
 
   return (
-    <div className={`container my-3 text-${darkMode==='dark' ? 'light' : 'black'}`} >
-      <h1 className="text-center" style={{ margin: "30px 0px" }} >NewsMonkey - Top {capatilizedFirstLetter(props.category)} Headlines</h1>
+    <div className={`container my-3 text-${darkMode === 'dark' ? 'light' : 'black'}`} >
+      <h1 className="text-center" style={{ margin: "30px 0px ", marginTop: '90px' }} >NewsMonkey - Top {capatilizedFirstLetter(props.category)} Headlines</h1>
       {/* {loading && <Spinner />} */}
 
       <InfiniteScroll     //setup infinite scrolling 
         dataLength={articles.length}
         next={fetchMoreData}
         hasMore={articles.length !== totalResults}
-        loader={<Spinner/>}>
+        loader={loading && <Spinner />}>
 
         <div className="container">
           <div className="row my-3">

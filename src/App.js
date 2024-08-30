@@ -8,17 +8,19 @@ import LoadingBar from 'react-top-loading-bar'
 
 const App = (props) => {
 
-  let apiKey = process.env.REACT_APP_NEWS_API   //Added API key from .env file
+  const pageSize= "30";
+
+  const apiKey = process.env.REACT_APP_NEWS_API   //Added API key from .env file
 
   // darkmode 
   const [darkMode, setdarkMode] = useState('light');
   const [progress, setProgress] = useState(0)
 
   const toggleDarkMode = () => {
-    if(darkMode === 'light'){
+    if (darkMode === 'light') {
       setdarkMode('dark');
       document.body.style.backgroundColor = '#042743';
-    }else{
+    } else {
       setdarkMode('light');
       document.body.style.backgroundColor = 'white';
     }
@@ -30,7 +32,7 @@ const App = (props) => {
       path: '/',
       element: (
         <>
-          <NavBar darkMode={darkMode} toggleDarkMode={toggleDarkMode}  />
+          <NavBar darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
           <LoadingBar             //top loading bar
             height={3}
             color='#f11946'
@@ -42,31 +44,31 @@ const App = (props) => {
       children: [
         {
           path: "general",
-          element: <News setProgress={setProgress} apiKey={apiKey} key="general" darkMode={darkMode} pageSize={30} county="in" category="general" />,   // using key, mounting the components with the updated props
+          element: <News setProgress={setProgress} apiKey={apiKey} key="general" darkMode={darkMode} pageSize={pageSize} county="in" category="general" />,   // using key, mounting the components with the updated props
         },
         {
           path: "business",
-          element: <News setProgress={setProgress} apiKey={apiKey} key="business" darkMode={darkMode} pageSize={30} county="in" category="business" />,
+          element: <News setProgress={setProgress} apiKey={apiKey} key="business" darkMode={darkMode} pageSize={pageSize} county="in" category="business" />,
         },
         {
           path: "entertainment",
-          element: <News setProgress={setProgress} apiKey={apiKey} key="entertainment" darkMode={darkMode} pageSize={30} county="in" category="entertainment" />,
+          element: <News setProgress={setProgress} apiKey={apiKey} key="entertainment" darkMode={darkMode} pageSize={pageSize} county="in" category="entertainment" />,
         },
         {
           path: "health",
-          element: <News setProgress={setProgress} apiKey={apiKey} key="health" darkMode={darkMode} pageSize={30} county="in" category="health" />,
+          element: <News setProgress={setProgress} apiKey={apiKey} key="health" darkMode={darkMode} pageSize={pageSize} county="in" category="health" />,
         },
         {
           path: "science",
-          element: <News setProgress={setProgress} apiKey={apiKey} key="science" darkMode={darkMode} pageSize={30} county="in" category="science" />,
+          element: <News setProgress={setProgress} apiKey={apiKey} key="science" darkMode={darkMode} pageSize={pageSize} county="in" category="science" />,
         },
         {
           path: "sports",
-          element: <News setProgress={setProgress} apiKey={apiKey} key="sports" darkMode={darkMode} pageSize={30} county="in" category="sports" />,
+          element: <News setProgress={setProgress} apiKey={apiKey} key="sports" darkMode={darkMode} pageSize={pageSize} county="in" category="sports" />,
         },
         {
           path: "technology",
-          element: <News setProgress={setProgress} apiKey={apiKey} key="technology" darkMode={darkMode} pageSize={30} county="in" category="technology" />,
+          element: <News setProgress={setProgress} apiKey={apiKey} key="technology" darkMode={darkMode} pageSize={pageSize} county="in" category="technology" />,
         },
       ],
     },
