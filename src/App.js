@@ -8,6 +8,9 @@ import LoadingBar from 'react-top-loading-bar'
 
 export default class App extends Component {
 
+  apiKey = process.env.REACT_APP_NEWS_API   //Added API key from .env file
+
+  // darkmode 
   constructor(props) {
     super(props);
     this.state = {
@@ -61,31 +64,31 @@ export default class App extends Component {
         children: [
           {
             path: "general",
-            element: <News setProgress={this.setProgress} key="general" darkMode={darkMode} pageSize={30} county="in" category="general" />,   // using key, mounting the components with the updated props
+            element: <News setProgress={this.setProgress} apiKey={this.apiKey} key="general" darkMode={darkMode} pageSize={30} county="in" category="general" />,   // using key, mounting the components with the updated props
           },
           {
             path: "business",
-            element: <News setProgress={this.setProgress} key="business" darkMode={darkMode} pageSize={30} county="in" category="business" />,
+            element: <News setProgress={this.setProgress} apiKey={this.apiKey} key="business" darkMode={darkMode} pageSize={30} county="in" category="business" />,
           },
           {
             path: "entertainment",
-            element: <News setProgress={this.setProgress} key="entertainment" darkMode={darkMode} pageSize={30} county="in" category="entertainment" />,
+            element: <News setProgress={this.setProgress} apiKey={this.apiKey} key="entertainment" darkMode={darkMode} pageSize={30} county="in" category="entertainment" />,
           },
           {
             path: "health",
-            element: <News setProgress={this.setProgress} key="health" darkMode={darkMode} pageSize={30} county="in" category="health" />,
+            element: <News setProgress={this.setProgress} apiKey={this.apiKey} key="health" darkMode={darkMode} pageSize={30} county="in" category="health" />,
           },
           {
             path: "science",
-            element: <News setProgress={this.setProgress} key="science" darkMode={darkMode} pageSize={30} county="in" category="science" />,
+            element: <News setProgress={this.setProgress} apiKey={this.apiKey} key="science" darkMode={darkMode} pageSize={30} county="in" category="science" />,
           },
           {
             path: "sports",
-            element: <News setProgress={this.setProgress} key="sports" darkMode={darkMode} pageSize={30} county="in" category="sports" />,
+            element: <News setProgress={this.setProgress} apiKey={this.apiKey} key="sports" darkMode={darkMode} pageSize={30} county="in" category="sports" />,
           },
           {
             path: "technology",
-            element: <News setProgress={this.setProgress} key="technology" darkMode={darkMode} pageSize={30} county="in" category="technology" />,
+            element: <News setProgress={this.setProgress} apiKey={this.apiKey} key="technology" darkMode={darkMode} pageSize={30} county="in" category="technology" />,
           },
         ],
       },

@@ -38,7 +38,7 @@ export class News extends Component {
   
   async updateNews() {
     this.props.setProgress(10); //initial value of progress for top loader 
-    let url = `https://newsapi.org/v2/top-headlines?county=${this.props.county}&category=${this.props.category}&apiKey=8bfa2bdf2e674351abd2abb6baf3f035&page=${this.state.page}&pageSize=${this.props.pageSize}`; //api url
+    let url = `https://newsapi.org/v2/top-headlines?county=${this.props.county}&category=${this.props.category}&apiKey=${this.props.apiKey}&page=${this.state.page}&pageSize=${this.props.pageSize}`; //api url
     this.setState({ loading: true });
     let data = await fetch(url);  //fetching api
     this.props.setProgress(30);
@@ -72,7 +72,7 @@ export class News extends Component {
   //fatching data with url in infinite scroll
   fetchMoreData = async () => {         
     this.setState({ page: this.state.page + 1 })
-    let url = `https://newsapi.org/v2/top-headlines?county=${this.props.county}&category=${this.props.category}&apiKey=8bfa2bdf2e674351abd2abb6baf3f035&page=1&pageSize=${this.props.pageSize}`; //api url
+    let url = `https://newsapi.org/v2/top-headlines?county=${this.props.county}&category=${this.props.category}&apiKey=${this.props.apiKey}&page=1&pageSize=${this.props.pageSize}`; //api url
     this.setState({ loading: true });
     let data = await fetch(url);
     let parsedData = await data.json();
